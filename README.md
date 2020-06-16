@@ -3,8 +3,9 @@
 a systematic procedure to construct a set of cosolvent for drug discovery.
 
 This repository consists of two parts:
-- **cosolvent_generation**
+- **cosolv_generator**
   - For generation of cosolvent structures
+  - Two sub-parts: compounds decomposition & substructure filtering
 - **scp_solver**
   - A minimum set cover problem solver based on [Beasley1990]
   - For construction of cosolvent sets
