@@ -25,7 +25,7 @@ grep fragment_info fda_annotated.sdf -A 1 | grep -v -e fragment_info -e "--" | s
 paste -d "," fragments.smi counts | sed "s/ //g" > fragments.csv
 ```
 
-Finally, substructures were filtered ( `subst_filtering.ipynb` ). Selected substructures will be treated as cosolvent. 
+Finally, substructures were filtered ( `subst_filtering.ipynb` ). Selected substructures will be treated as an initial set of cosolvents in the EXPRORER. 
 
 
 ## Reference
