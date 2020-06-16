@@ -1,0 +1,3 @@
+LIGAND testdata/G39.mol2
+OUTPUT testdata/G39annotated.sdf
+FRAGMENT testdata/G39fragment.sdf
