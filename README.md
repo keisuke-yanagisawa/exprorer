@@ -20,7 +20,7 @@ This repository consists of two parts:
 - Python 3
 
 ## Environment construction
-This section shows an example of an author (Keisuke Yanagisawa) without administrator privileges (i.e. supercomputing system), and we are not guaranteed the procedure works well or not in your computational environment. 
+This section shows an example of an author (Keisuke Yanagisawa) without administrator privileges (i.e. supercomputing system), and we do not guarantee the procedure works well or not in your computational environment. 
 
 ### C++
 
