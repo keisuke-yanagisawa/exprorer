@@ -1,6 +1,6 @@
 # EXPRORER
 **EXPRORER** (**EX**tended **PRO**bes set construction by **RE**presentative **R**etrieval) is 
-a systematic procedure to construct a set of cosolvent for drug discovery.
+a systematic procedure to construct a set of cosolvent for drug discovery [Yanagisawa].
 
 This repository consists of two parts:
 - **cosolv_generator**
@@ -11,13 +11,14 @@ This repository consists of two parts:
   - For construction of cosolvent sets
   
 ## Overall requirements
+Versions are an examples of an author's environment.
 
-- C++
+- C++ (cosolv_generator, scp_solver)
   - [Boost](https://www.boost.org/) 1.69.0
-    - We haven't confirmed more recent versions
   - [Open Babel](http://openbabel.org/wiki/Main_Page) 2.4.1
     - **Do not use the latest version, 3.1.1 or newer** since we found the code did not work with it.
-- Python 3
+- Python 3 (cosolv_generator)
+  - [RDKit](https://www.rdkit.org/) 2020.03.1
 
 ## Environment construction
 This section shows an example of an author (Keisuke Yanagisawa) without administrator privileges (i.e. supercomputing system), and we do not guarantee the procedure works well or not in your computational environment. 
@@ -34,8 +35,8 @@ cd boost_1_69_0
 ./bootstrap.sh
 ./b2 install --prefix=PATH/TO/BOOST/1_69_0 --without-python
 
-echo "export BOOST_INSTALL_PATH=/PATH/TO/BOOST/1_69_0" > ~/.bashrc
-echo "export LD_LIBRARY_PATH=$BOOST_INSTALL_PATH/lib:$LD_LIBRARY_PATH" > ~/.bashrc
+echo "export BOOST_INSTALL_PATH=/PATH/TO/BOOST/1_69_0" >> ~/.bashrc
+echo "export LD_LIBRARY_PATH=$BOOST_INSTALL_PATH/lib:$LD_LIBRARY_PATH" >> ~/.bashrc
 source ~/.bashrc
 ```
 
@@ -53,13 +54,23 @@ make -j
 make test
 make install
 
-echo "export OBABEL_INSTALL_PATH=/PATH/TO/openbabel/2_4_1" > ~/.bashrc
-echo "export LD_LIBRARY_PATH=$OBABEL_INSTALL_PATH:lib:$LD_LIBRARY_PATH" > ~/.bashrc
+echo "export OBABEL_INSTALL_PATH=/PATH/TO/openbabel/2_4_1" >> ~/.bashrc
+echo "export LD_LIBRARY_PATH=$OBABEL_INSTALL_PATH:lib:$LD_LIBRARY_PATH" >> ~/.bashrc
 source ~/.bashrc
 ```
 
 ### Python 3
+This example uses Anaconda (It is possible to use `pip` instead of it).
 
+```bash
+cd /PATH/TO/TMPDIR
+wget https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-x86_64.sh
+bash ./Anaconda3-2020.02-Linux-x86_64.sh
+source ~/.bashrc
+
+conda install rdkit=2020.03.1
+```
 
 ## Reference
 [Beasley1990] Beasley JE. "A Lagrangian Heuristic for Set-Covering Problems", Nav Res Logist 37: 151-164, 1990.  
+[Yanagisawa] Yanagisawa K, Moriwaki Y, Terada T, Shimizu K. (in preparation)
