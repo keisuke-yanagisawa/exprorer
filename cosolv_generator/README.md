@@ -2,7 +2,7 @@
 
 It consists of two sub-parts:
 
-- cmpd_decomposition
+- `cmpd_decomposition`
   - Compounds decomposition
   - Partly modified from Spresso decomposition algorithm [Yanagisawa2017]
 - `subst_filtering.ipynb`
