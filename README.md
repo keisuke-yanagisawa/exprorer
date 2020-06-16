@@ -11,13 +11,14 @@ This repository consists of two parts:
   - For construction of cosolvent sets
   
 ## Overall requirements
+Versions are an examples of an author's environment.
 
-- C++
+- C++ (cosolv_generator, scp_solver)
   - [Boost](https://www.boost.org/) 1.69.0
-    - We haven't confirmed more recent versions
   - [Open Babel](http://openbabel.org/wiki/Main_Page) 2.4.1
     - **Do not use the latest version, 3.1.1 or newer** since we found the code did not work with it.
-- Python 3
+- Python 3 (cosolv_generator)
+  - [RDKit](https://www.rdkit.org/) 2020.03.1
 
 ## Environment construction
 This section shows an example of an author (Keisuke Yanagisawa) without administrator privileges (i.e. supercomputing system), and we do not guarantee the procedure works well or not in your computational environment. 
@@ -59,7 +60,16 @@ source ~/.bashrc
 ```
 
 ### Python 3
+This example uses Anaconda (It is possible to use `pip` instead of it).
 
+```bash
+cd /PATH/TO/TMPDIR
+wget https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-x86_64.sh
+bash ./Anaconda3-2020.02-Linux-x86_64.sh
+source ~/.bashrc
+
+conda install rdkit=2020.03.1
+```
 
 ## Reference
 [Beasley1990] Beasley JE. "A Lagrangian Heuristic for Set-Covering Problems", Nav Res Logist 37: 151-164, 1990.  
