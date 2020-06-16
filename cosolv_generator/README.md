@@ -7,6 +7,7 @@ It consists of two sub-parts:
   - Partly modified from Spresso decomposition algorithm [Yanagisawa2017]
 - `subst_filtering.ipynb`
   - Filtering of decomposed substructures
+  - Modifiable as you like via IPython Notebook 
 
 ## Procedure of cosolvent structure generation
 
