@@ -14,7 +14,7 @@ It consists of two sub-parts:
 First, compounds are decomposed with `cmpd_decomposition`.
 
 ```bash
-./exprorer_decompose -l cmpd.sdf -f fragment.sdf -o cmpd_annotated.sdf
+./cmpd_decomposition/exprorer_decompose -l cmpd.sdf -f fragment.sdf -o cmpd_annotated.sdf
 ```
 
 Secondly, substructure (fragment) information is gathered by below commands.
