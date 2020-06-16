@@ -16,7 +16,7 @@ make all
 ```
 
 ### Input file format
-The input file format is the same as [OR-Library](http://people.brunel.ac.uk/~mastjjb/jeb/info.html) [1]
+The input file format is the same as [OR-Library](http://people.brunel.ac.uk/~mastjjb/jeb/info.html) [Beasley1990]
 
 The homepage describes the format briefly:
 
@@ -29,4 +29,4 @@ row i followed by a list of the columns which cover row i
 ```
 
 ## Reference
-[1] Beasley JE. "OR-Library: Distributing Test Problems by Electronic Mail", J Oper Res Soc 41(11): 1069-1072, 1990.
+[Beasley1990] Beasley JE. "OR-Library: Distributing Test Problems by Electronic Mail", J Oper Res Soc 41(11): 1069-1072, 1990.
