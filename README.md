@@ -1,6 +1,6 @@
 # EXPRORER
 **EXPRORER** (**EX**tended **PRO**bes set construction by **RE**presentative **R**etrieval) is 
-a systematic procedure to construct a set of cosolvent for drug discovery.
+a systematic procedure to construct a set of cosolvent for drug discovery [Yanagisawa].
 
 This repository consists of two parts:
 - **cosolv_generator**
@@ -35,8 +35,8 @@ cd boost_1_69_0
 ./bootstrap.sh
 ./b2 install --prefix=PATH/TO/BOOST/1_69_0 --without-python
 
-echo "export BOOST_INSTALL_PATH=/PATH/TO/BOOST/1_69_0" > ~/.bashrc
-echo "export LD_LIBRARY_PATH=$BOOST_INSTALL_PATH/lib:$LD_LIBRARY_PATH" > ~/.bashrc
+echo "export BOOST_INSTALL_PATH=/PATH/TO/BOOST/1_69_0" >> ~/.bashrc
+echo "export LD_LIBRARY_PATH=$BOOST_INSTALL_PATH/lib:$LD_LIBRARY_PATH" >> ~/.bashrc
 source ~/.bashrc
 ```
 
@@ -54,8 +54,8 @@ make -j
 make test
 make install
 
-echo "export OBABEL_INSTALL_PATH=/PATH/TO/openbabel/2_4_1" > ~/.bashrc
-echo "export LD_LIBRARY_PATH=$OBABEL_INSTALL_PATH:lib:$LD_LIBRARY_PATH" > ~/.bashrc
+echo "export OBABEL_INSTALL_PATH=/PATH/TO/openbabel/2_4_1" >> ~/.bashrc
+echo "export LD_LIBRARY_PATH=$OBABEL_INSTALL_PATH:lib:$LD_LIBRARY_PATH" >> ~/.bashrc
 source ~/.bashrc
 ```
 
@@ -73,3 +73,4 @@ conda install rdkit=2020.03.1
 
 ## Reference
 [Beasley1990] Beasley JE. "A Lagrangian Heuristic for Set-Covering Problems", Nav Res Logist 37: 151-164, 1990.  
+[Yanagisawa] Yanagisawa K, Moriwaki Y, Terada T, Shimizu K. (in preparation)
