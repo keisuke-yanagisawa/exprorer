@@ -31,8 +31,8 @@ First, compounds are decomposed with `cmpd_decomposition`.
 Secondly, substructure (fragment) information is gathered by below commands.
 
 ```bash
-grep fragment_info fda_annotated.sdf -A 1 | grep -v -e fragment_info -e "--" | sed "s/,/\n/g" | sort | uniq -c | sort -nr | cut -c9- > fragments.smi
-grep fragment_info fda_annotated.sdf -A 1 | grep -v -e fragment_info -e "--" | sed "s/,/\n/g" | sort | uniq -c | sort -nr | cut -c1-8 > counts
+grep fragment_info cmpd_annotated.sdf -A 1 | grep -v -e fragment_info -e "--" | sed "s/,/\n/g" | sort | uniq -c | sort -nr | cut -c9- > fragments.smi
+grep fragment_info cmpd_annotated.sdf -A 1 | grep -v -e fragment_info -e "--" | sed "s/,/\n/g" | sort | uniq -c | sort -nr | cut -c1-8 > counts
 paste -d "," fragments.smi counts | sed "s/ //g" > fragments.csv
 ```
 
