@@ -14,7 +14,7 @@ Versions are an examples of an author's environment.
 - C++ (cosolv_generator, scp_solver)
   - [Boost](https://www.boost.org/) 1.69.0
   - [Open Babel](http://openbabel.org/wiki/Main_Page) 2.4.1
-    - **Do not use the latest version, 3.1.1 or newer** since we found the code did not work with it.
+    - **Do not use the latest version, 3.0.0 or newer** since we found the code did not work with it.
 - Python 3 (cosolv_generator)
   - [RDKit](https://www.rdkit.org/) 2020.03.1
 
