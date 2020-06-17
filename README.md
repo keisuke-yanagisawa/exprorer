@@ -2,7 +2,7 @@
 **EXPRORER** (**EX**tended **PRO**bes set construction by **RE**presentative **R**etrieval) is 
 a systematic procedure to construct a set of cosolvent for drug discovery [Yanagisawa].
 
-This repository consists of two parts:
+This repository contains two parts of it:
 - **cosolv_generator**
   - For generation of cosolvent structures
   - Two sub-parts: compounds decomposition & substructure filtering
