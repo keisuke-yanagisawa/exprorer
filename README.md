@@ -3,12 +3,10 @@
 a systematic procedure to construct a set of cosolvent for drug discovery [Yanagisawa].
 
 This repository contains two parts of it:
-- **cosolv_generator**
-  - For generation of cosolvent structures
+- **cosolv_generator**: Generation of cosolvent structures
   - Two sub-parts: compounds decomposition & substructure filtering
-- **scp_solver**
+- **scp_solver**: Construction of cosolvent sets
   - A minimum set cover problem solver based on [Beasley1990]
-  - For construction of cosolvent sets
   
 ## Overall requirements
 Versions are an examples of an author's environment.
