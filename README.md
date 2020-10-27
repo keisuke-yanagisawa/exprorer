@@ -2,13 +2,11 @@
 **EXPRORER** (**EX**tended **PRO**bes set construction by **RE**presentative **R**etrieval) is 
 a systematic procedure to construct a set of cosolvent for drug discovery [Yanagisawa].
 
-This repository consists of two parts:
-- **cosolv_generator**
-  - For generation of cosolvent structures
+This repository contains two parts of it:
+- **cosolv_generator**: Generation of cosolvent structures
   - Two sub-parts: compounds decomposition & substructure filtering
-- **scp_solver**
+- **scp_solver**: Construction of cosolvent sets
   - A minimum set cover problem solver based on [Beasley1990]
-  - For construction of cosolvent sets
   
 ## Overall requirements
 Versions are an examples of an author's environment.
@@ -16,7 +14,7 @@ Versions are an examples of an author's environment.
 - C++ (cosolv_generator, scp_solver)
   - [Boost](https://www.boost.org/) 1.69.0
   - [Open Babel](http://openbabel.org/wiki/Main_Page) 2.4.1
-    - **Do not use the latest version, 3.1.1 or newer** since we found the code did not work with it.
+    - **Do not use the latest version, 3.0.0 or newer** since we found the code did not work with it.
 - Python 3 (cosolv_generator)
   - [RDKit](https://www.rdkit.org/) 2020.03.1
 
