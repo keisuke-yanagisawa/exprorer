@@ -25,8 +25,8 @@ preparation(){
     logging_debug "protein_param_file $protein_param_file"
     logging_debug "probe_param_file $probe_param_file"
 
-    cp $protein_param_file $OUTPUTDIR/prep$i/input/protein.conf
-    cp $probe_param_file   $OUTPUTDIR/prep$i/input/probe.conf
+    cp $INPUTDIR/$protein_param_file $OUTPUTDIR/prep$i/input/protein.conf
+    cp $INPUTDIR/$probe_param_file   $OUTPUTDIR/prep$i/input/probe.conf
     cd $OUTPUTDIR/prep$i
 
     $PYTHON $WORKDIR/script/reorder_protein_resis.py \
@@ -95,6 +95,7 @@ EOF
 start_mdrun(){
     local TARGET_NAME=$1
     local i=$2
+    local ncpus=$3
     
     if [ `is_calculated $OUTPUTDIR $i ${map_prefix}_nVH.dx` == 1 ]; then
         logging_info "$TARGET_NAME $i : skipped because it has been already calculated"
@@ -102,7 +103,7 @@ start_mdrun(){
     fi
 
     cd $OUTPUTDIR/system$i
-    GMX=$GMX bash mdrun.sh 
+    GMX=$GMX bash mdrun.sh $ncpus
     echo $PYTHON $WORKDIR/script/gen_pmap.py \
 	-p top/$TARGET_NAME.top \
 	-y pr/$TARGET_NAME.xtc \
@@ -171,8 +172,9 @@ while [ $i -lt $iter_ed ]
 do
     for j in ${gpus[@]}
     do
+	echo $i $iter_st $iter_ed "(" ${gpus[@]} ")" $j $NCPUS_PER_GPU
 	export CUDA_VISIBLE_DEVICES="$j"
-	start_mdrun $TARGET_NAME $i &
+	start_mdrun $TARGET_NAME $i $NCPUS_PER_GPU &
 	
 	i=$(( i + 1 ))
 	if [ $i -ge $iter_ed ]; then

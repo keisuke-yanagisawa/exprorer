@@ -26,8 +26,8 @@ is_calculated(){
 }
 
 get_gpu_list(){
-    local gpu_lst=(${CUDA_VISIBLE_DEVICES/,/ })
-    echo $gpu_lst
+    local gpu_lst=(${CUDA_VISIBLE_DEVICES//,/ })
+    echo ${gpu_lst[@]}
 }
 
 get_ncpus(){

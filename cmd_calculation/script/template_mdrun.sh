@@ -1,5 +1,7 @@
 #!/bin/sh
 
+ncpus=$1
+
 ## initialize
 top_wo_ext=../top/{{ NAME }}
 now=../top/{{ NAME }}
@@ -8,9 +10,9 @@ if [ A$GMX = "A" ];then
 fi
 
 ## for OpenMP parallelization
-export OMP_NUM_THREADS=$PBS_NUM_PPN
+export OMP_NUM_THREADS=$ncpus
 ## for thread-MPI parallelization
-#tMPI_COMM="-nt $PBS_NUM_PPN"
+#tMPI_COMM="-nt $ncpus"
 
 ## minimize
 cd minimize

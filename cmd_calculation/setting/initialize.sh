@@ -5,6 +5,8 @@ export PATH=$(echo -n $PATH |tr ':' '\n' |sed "/\/apps\/t3\/sles12sp2\/isv\/ambe
 module load cuda/9.2.148
 module load gromacs/2019.4
 
+export CUDA_VISIBLE_DEVICES=0,1,2,3
+
 conda activate md_analysis
 
 PACKMOL=packmol
