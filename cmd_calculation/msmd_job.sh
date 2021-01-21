@@ -108,7 +108,7 @@ start_mdrun(){
 	-p top/$TARGET_NAME.top \
 	-y pr/$TARGET_NAME.xtc \
 	-c top/$TARGET_NAME.gro \
-	--start $begin_snapshot_for_pr
+	--start $begin_snapshot_for_pr \
 	--cpptraj $CPPTRAJ \
         --outprefix $map_prefix \
 	$OUTPUTDIR/prep$i/protein_updated.conf \
@@ -117,7 +117,7 @@ start_mdrun(){
 	-p top/$TARGET_NAME.top \
 	-y pr/$TARGET_NAME.xtc \
 	-c top/$TARGET_NAME.gro \
-	--start $begin_snapshot_for_pr
+	--start $begin_snapshot_for_pr \
 	--cpptraj $CPPTRAJ \
         --outprefix $map_prefix \
 	$OUTPUTDIR/prep$i/protein_updated.conf \
