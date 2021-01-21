@@ -27,18 +27,18 @@ rms ToREF ref [REF] :{resi_st}-{resi_ed}@CA :{ref_resi_st}-{ref_resi_ed}@CA out 
 
 
 # "center" maybe changed AFTER grid generation. be careful...
-# grid {prefix}_nV.dx  {n} {d} {n} {d} {n} {d} center :{resi_st}-{resi_ed}@CA :{cid}&(!@VIS)
-# grid {prefix}_nVH.dx {n} {d} {n} {d} {n} {d} center :{resi_st}-{resi_ed}@CA :{cid}&(!@VIS)&(!@H*)
-# grid {prefix}_V.dx   {n} {d} {n} {d} {n} {d} center :{resi_st}-{resi_ed}@CA :{cid}@VIS
-# grid {prefix}_O.dx   {n} {d} {n} {d} {n} {d} center :{resi_st}-{resi_ed}@CA :{cid}@O*
-grid {prefix}_nV.dx  {n} {d} {n} {d} {n} {d} :{cid}&(!@VIS)
-grid {prefix}_nVH.dx {n} {d} {n} {d} {n} {d} :{cid}&(!@VIS)&(!@H*)
-grid {prefix}_V.dx   {n} {d} {n} {d} {n} {d} :{cid}@VIS
-grid {prefix}_O.dx   {n} {d} {n} {d} {n} {d} :{cid}@O*
+# file name must not start with a number (i.e. 1L2S_A11_nV.dx)
+# grid map_{prefix}_nV.dx  {n} {d} {n} {d} {n} {d} center :{resi_st}-{resi_ed}@CA :{cid}&(!@VIS)
+# grid map_{prefix}_nVH.dx {n} {d} {n} {d} {n} {d} center :{resi_st}-{resi_ed}@CA :{cid}&(!@VIS)&(!@H*)
+# grid map_{prefix}_V.dx   {n} {d} {n} {d} {n} {d} center :{resi_st}-{resi_ed}@CA :{cid}@VIS
+# grid map_{prefix}_O.dx   {n} {d} {n} {d} {n} {d} center :{resi_st}-{resi_ed}@CA :{cid}@O*
+grid map_{prefix}_nV.dx  {n} {d} {n} {d} {n} {d} :{cid}&(!@VIS)
+grid map_{prefix}_nVH.dx {n} {d} {n} {d} {n} {d} :{cid}&(!@VIS)&(!@H*)
+grid map_{prefix}_V.dx   {n} {d} {n} {d} {n} {d} :{cid}@VIS
+grid map_{prefix}_O.dx   {n} {d} {n} {d} {n} {d} :{cid}@O*
 
 trajout {prefix}_position_check.pdb start 1 stop 1 offset 1
 trajout {prefix}_position_check2.pdb offset 100
-trajout {prefix}_last_frame.pdb start 2001
 go
 exit
 EOF""")
