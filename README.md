@@ -5,6 +5,7 @@ a systematic procedure to construct a set of cosolvent for drug discovery [Yanag
 This repository contains two parts of it:
 - **cosolv_generator**: Generation of cosolvent structures
   - Two sub-parts: compounds decomposition & substructure filtering
+- **cmd_calculation**: Calculation scripts for Cosolvent MDs
 - **scp_solver**: Construction of cosolvent sets
   - A minimum set cover problem solver based on [Beasley1990]
   
@@ -17,6 +18,9 @@ Versions are an examples of an author's environment.
     - **Do not use the latest version, 3.0.0 or newer** since we found the code did not work with it.
 - Python 3 (cosolv_generator)
   - [RDKit](https://www.rdkit.org/) 2020.03.1
+  - OpenBabel 2.4.1 (Please DO NOT use 3.x.x)
+
+As for `cmd_calculation`, requirements are shown in `cmd_calculation/README.md`.
 
 ## Environment construction
 This section shows an example of an author (Keisuke Yanagisawa) without administrator privileges (i.e. supercomputing system), and we do not guarantee the procedure works well or not in your computational environment. 
