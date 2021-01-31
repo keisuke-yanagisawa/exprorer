@@ -1,14 +1,14 @@
 ## Requirements
 
-- python 3 ($PYTHON)
+- python 3 (`$PYTHON`)
   - Several modules are needed (an example of installation is shown below).
 - openbabel 2.4.1
   - **Do not use the latest version, 3.0.0 or newer** since we have not tested yet.
   - It is possible to install it along with python 3 via conda.
-- AmberTools 18 ($TLEAP, $CPPTRAJ)
+- AmberTools 18 (`$TLEAP`, `$CPPTRAJ`)
   - It is needed for use of `tleap` and `cpptraj`
-- Gromacs 2019.4 ($GMX)
-- packmol 18.169 ($PACKMOL)
+- Gromacs 2019.4 (`$GMX`)
+- packmol 18.169 (`$PACKMOL`)
 - (Gaussian 16.B01)
   - So far we have not included the codes for QM calculation of probes (structural optimization and RESP charge calculation)
   - It is needed **only** when new probes are introduced.
