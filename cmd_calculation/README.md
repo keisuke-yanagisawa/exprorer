@@ -49,7 +49,7 @@ The commands will execute 20 runs of CMD with Gromacs, each of which includes 40
 2. Make new protein config file (example: `example/protein.conf`). You have to write down an absolute path to protein PDB file and the residue numbers which make disulfide bonds (The record `binding_site_residues` is not used so far). 
 3．Make new MSMD config file like `example/msmd_config.sh`. Please make sure to use new protein config file.
 
-###　To do CMD with a different probe (cosolvent)
+### To do CMD with a different probe (cosolvent)
 
 1. Prepare probe `.mol2` and `.pdb` files
 2. Make new probe config file (example: `example/probe.conf`). You have to write down absolute pathes to `.mol2` and `.pdb` files as well as residue name of the probe.
