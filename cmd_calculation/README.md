@@ -13,7 +13,7 @@
   - So far we have not included the codes for QM calculation of probes (structural optimization and RESP charge calculation)
   - It is needed **only** when new probes are introduced.
 
-
+## Preparation
 
 ### Construction of Python3 environment with Conda
 
@@ -24,7 +24,7 @@ conda install -n ENVIRONMENT_NAME -c conda-forge openbabel==2.4.1
 ```
 
 
-### Preparation
+### Modification of `setting/initialize.sh`
 
 Please modify `setting/initialize.sh` to correctly use all executables and GPUs.
 
@@ -34,15 +34,23 @@ If all settings goes well, below commands run MD calculations.
 cd /PATH/TO/exprorer/cmd_calculation    # MUST RUN THEM AT THIS DIRECTORY
 bash msmd_job.sh example/msmd_config.sh
 ```
-The commands will run 20 runs of Gromacs, each of which includes 40 ns of production run as a default.
+The commands will execute 20 runs of CMD with Gromacs, each of which includes 40 ns of production run as a default.
 
-### 異なるタンパク質を用いた計算を行う場合
+## How to modify config files
 
-1. `example/protein.conf` を参考に、タンパク質のpdbファイルへの絶対パス、ジスルフィド結合に関する情報を記述したconfigファイルを作成する。（現時点ではbinding_site_residuesは利用していない）
-  - なお、コードの内部で自動的に残基番号は1からに修正されるので注意。（入力pdbの残基番号と出力pdbの残基番号は異なっている可能性がある）
-2. `example/msmd_config.sh`を参考に、新しいconfigファイルを作成、1.で作成したconfigファイルを使うように指定する。
+### To change the number of runs / the length of each production run
 
-###　異なるProbeを用いた計算を行う場合
+1. Modify `msmd_config.sh`
 
-1. `example/probe.conf` を参考に、Probeのmol2ファイルおよびpdbファイルへの絶対パス、そのprobeのIDを指定する。現時点では原子タイプやProbe濃度はGAFF2, 0.25Mで固定としているので、その部分は修正する必要はない。
-2. `example/msmd_config.sh`を参考に、新しいconfigファイルを作成、1.で作成したconfigファイルを使うように指定する。
+### To do CMD with a different protein
+
+1. Prepare the protein `.pdb` file
+  - Residue IDs must be 1-origin and must not any jump of residue IDs.
+2. Make new protein config file (example: `example/protein.conf`). You have to write down an absolute path to protein PDB file and the residue numbers which make disulfide bonds (The record `binding_site_residues` is not used so far). 
+3．Make new MSMD config file like `example/msmd_config.sh`. Please make sure to use new protein config file.
+
+###　To do CMD with a different probe (cosolvent)
+
+1. Prepare probe `.mol2` and `.pdb` files
+2. Make new probe config file (example: `example/probe.conf`). You have to write down absolute pathes to `.mol2` and `.pdb` files as well as residue name of the probe.
+3．Make new MSMD config file like `example/msmd_config.sh`. Please make sure to use new probe config file.
