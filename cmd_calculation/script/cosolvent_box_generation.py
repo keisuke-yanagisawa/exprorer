@@ -67,8 +67,9 @@ def calculate_boxsize(pdbfile, tmp_prefix=".tmp"):
     return box_size
 
 
-def run_parmchk(mol2, frcmod):
-    print(gop("parmchk2 -i {} -f mol2 -o {}".format(mol2, frcmod)))
+def run_parmchk(mol2, frcmod, at):
+    at_id = {"gaff": 1, "gaff2": 2}[at]
+    print(gop(f"parmchk2 -i {mol2} -f mol2 -o {frcmod} -s {at_id}"))
 
 
 def gen_packmol_input(protein_pdb, cosolv_pdbs, box_pdb, inp, box_size, molar):
@@ -174,7 +175,7 @@ if __name__ == "__main__":
         gop("grep -v OXT {} > {}".format(packmol_box_pdb, temp_box))
 
         for mol2, frcmod in zip(cmols, cfrcmods):
-            run_parmchk(mol2, frcmod)
+            run_parmchk(mol2, frcmod, params["Cosolvent"]["atomtype"])
 
 
         # 2. amber tleap
