@@ -3,8 +3,8 @@
 ncpus=$1
 
 ## initialize
-top_wo_ext=../top/{{ NAME }}
-now=../top/{{ NAME }}
+top_wo_ext=../top/TMP
+now=../top/TMP
 if [ A$GMX = "A" ];then
     GMX=gmx
 fi
@@ -13,7 +13,7 @@ fi
 export OMP_NUM_THREADS=$ncpus
 ## for thread-MPI parallelization
 
-for name in {{ STEP_NAMES }}
+for name in step1 step2 step3 step4 step5 step6 step7 step8 step9 step10 step11 step12
 do
     prev_cpt=""
     prev=$now

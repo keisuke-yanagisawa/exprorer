@@ -4,6 +4,10 @@
 
 . setting/initialize.sh
 
+if [ $do_reorder"A" == "A" ] ; then
+    do_reorder="Y"
+fi
+
 #### utility functions ####
 
 . script/bash_functions.sh
@@ -13,6 +17,7 @@
 preparation(){
 
     local i=$1
+    local do_reorder=$2 # Y or otherwise (N)
 
     if [ `is_calculated $OUTPUTDIR $i ${map_prefix}_nVH.dx` == 1 ]; then
         logging_info "$TARGET_NAME $i : skipped because it has been already calculated"
@@ -29,15 +34,19 @@ preparation(){
     cp $INPUTDIR/$probe_param_file   $OUTPUTDIR/prep$i/input/probe.conf
     cd $OUTPUTDIR/prep$i
 
-    $PYTHON $WORKDIR/script/reorder_protein_resis.py \
-	    -iconf $OUTPUTDIR/prep$i/input/protein.conf \
-	    -oconf $OUTPUTDIR/prep$i/protein_updated.conf \
-	    -opdb  $OUTPUTDIR/prep$i/protein.renumber.pdb \
-	    --gromacs $GMX
+    prot_conf=$OUTPUTDIR/prep$i/input/protein.conf
+    if [ $do_reorder == "Y" ] ; then
+	$PYTHON $WORKDIR/script/reorder_protein_resis.py \
+		-iconf $conffile \
+		-oconf $OUTPUTDIR/prep$i/protein_updated.conf \
+		-opdb  $OUTPUTDIR/prep$i/protein.renumber.pdb \
+		--gromacs $GMX
+	prot_conf=$OUTPUTDIR/prep$i/protein_updated.conf
+    fi
     
     cosolvent_ID=`get_ini_variable $OUTPUTDIR/prep$i/input/probe.conf Cosolvent cid`
     $PYTHON $WORKDIR/script/cosolvent_box_generation.py \
-	-prot_param $OUTPUTDIR/prep$i/protein_updated.conf \
+	-prot_param $prot_conf \
 	-cosolv_param $OUTPUTDIR/prep$i/input/probe.conf \
 	-tin   $WORKDIR/script/template_leap.in \
 	-oprefix $OUTPUTDIR/prep$i/$TARGET_NAME \
@@ -163,7 +172,7 @@ iter_ed=$(( $iter + $iter_st ))
 # parallel preparation
 for i in `seq $iter_st $(( $iter_ed - 1 ))`
 do
-    preparation $i &
+    preparation $i $do_reorder &
 done
 wait
 
