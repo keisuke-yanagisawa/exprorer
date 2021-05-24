@@ -29,15 +29,9 @@ preparation(){
     cp $INPUTDIR/$probe_param_file   $OUTPUTDIR/prep$i/input/probe.conf
     cd $OUTPUTDIR/prep$i
 
-    $PYTHON $WORKDIR/script/reorder_protein_resis.py \
-	    -iconf $OUTPUTDIR/prep$i/input/protein.conf \
-	    -oconf $OUTPUTDIR/prep$i/protein_updated.conf \
-	    -opdb  $OUTPUTDIR/prep$i/protein.renumber.pdb \
-	    --gromacs $GMX
-    
     cosolvent_ID=`get_ini_variable $OUTPUTDIR/prep$i/input/probe.conf Cosolvent cid`
     $PYTHON $WORKDIR/script/cosolvent_box_generation.py \
-	-prot_param $OUTPUTDIR/prep$i/protein_updated.conf \
+	-prot_param $OUTPUTDIR/prep$i/protein.conf \
 	-cosolv_param $OUTPUTDIR/prep$i/input/probe.conf \
 	-tin   $WORKDIR/script/template_leap.in \
 	-oprefix $OUTPUTDIR/prep$i/$TARGET_NAME \
@@ -62,15 +56,12 @@ preparation(){
 	-vname "VIS"
 
     # gen position restraint files
-    $PYTHON $WORKDIR/script/gen_posre.py \
+    $PYTHON $WORKDIR/script/add_posredefine2top.py \
 	-v -res WAT Na+ Cl- CA MG ZN ${cosolvent_ID} \
 	-target protein \
-	-i $OUTPUTDIR/prep$i/$TARGET_NAME.gro \
-	-oprefix $OUTPUTDIR/prep$i/posrePROTEIN
-    $PYTHON $WORKDIR/script/add_posredefine2top.py \
+	-gro $OUTPUTDIR/prep$i/$TARGET_NAME.gro \
 	-i $OUTPUTDIR/prep$i/${TARGET_NAME}_tmp.top \
 	-o $OUTPUTDIR/prep$i/$TARGET_NAME.top \
-	-prefix $OUTPUTDIR/prep$i/posrePROTEIN
 
 
     $GMX make_ndx -f $OUTPUTDIR/prep$i/$TARGET_NAME.gro << EOF
@@ -111,7 +102,7 @@ start_mdrun(){
 	--start $begin_snapshot_for_pr \
 	--cpptraj $CPPTRAJ \
         --outprefix $map_prefix \
-	$OUTPUTDIR/prep$i/protein_updated.conf \
+	$OUTPUTDIR/prep$i/protein.conf \
 	$OUTPUTDIR/prep$i/input/probe.conf
     $PYTHON $WORKDIR/script/gen_pmap.py \
 	-p top/$TARGET_NAME.top \
@@ -120,7 +111,7 @@ start_mdrun(){
 	--start $begin_snapshot_for_pr \
 	--cpptraj $CPPTRAJ \
         --outprefix $map_prefix \
-	$OUTPUTDIR/prep$i/protein_updated.conf \
+	$OUTPUTDIR/prep$i/protein.conf \
 	$OUTPUTDIR/prep$i/input/probe.conf
 }
 
