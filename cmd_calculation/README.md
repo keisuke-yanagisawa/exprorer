@@ -46,6 +46,7 @@ The commands will execute 20 runs of CMD with Gromacs, each of which includes 40
 
 1. Prepare the protein `.pdb` file
   - Residue IDs must be 1-origin and must not any jump of residue IDs.
+  - The protein should be centered.
 2. Make new protein config file (example: `example/protein.conf`). You have to write down an absolute path to protein PDB file and the residue numbers which make disulfide bonds (The record `binding_site_residues` is not used so far). 
 3．Make new MSMD config file like `example/msmd_config.sh`. Please make sure to use new protein config file.
 
