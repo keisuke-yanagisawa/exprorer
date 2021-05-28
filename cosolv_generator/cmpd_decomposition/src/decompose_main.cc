@@ -42,22 +42,19 @@ namespace {
 	  options(desc).positional(pos_desc).run(), vmap);
     notify(vmap);
 
-    // showing help dialogue.
-    if (vmap.count("help")){
-      std::cout << "Usage: espresso_decompose [options]\n"
+
+    // showing help dialog
+    bool insufficient_input = (!vmap.count("conf-file")) &&
+      (!vmap.count("fragment") || !vmap.count("ligand") || !vmap.count("output"));
+    bool help_mode = vmap.count("help");
+    if (insufficient_input || help_mode){
+      if (!help_mode){
+	std::cout << "too few arguments" << std::endl;
+      }
+      
+      std::cout << "Usage: " << argv[0] << "[options]" << std::endl
 		<< options << std::endl;
       std::exit(0);
-    }
-
-    // there are insufficient inputs
-    if (!vmap.count("conf-file")){
-      if (!vmap.count("fragment") || !vmap.count("ligand") || !vmap.count("output")){
-	std::cout << "too few arguments" << std::endl;
-	std::cout << "Usage: espresso_decompose [options]\n"
-		  << options << std::endl;
-	std::exit(1);
-
-      }
     }
     
     // parse input options and configuration file

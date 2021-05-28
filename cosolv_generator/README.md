@@ -10,7 +10,7 @@ It consists of two sub-parts:
   - Modifiable as you like via IPython Notebook 
 
 ## Build
-`exprorer_decompose` is written with C++, and thus it is needed to compile. The compilation is easy as shown below:
+`decompose` is written with C++, and thus it is needed to compile. The compilation is easy as shown below:
 
 ```bash
 cd cmpd_decomposition
@@ -25,7 +25,7 @@ The generation procedure can be separated into three sections.
 First, compounds are decomposed with `cmpd_decomposition`.
 
 ```bash
-./cmpd_decomposition/exprorer_decompose -l cmpd.sdf -f fragment.sdf -o cmpd_annotated.sdf
+./cmpd_decomposition/decompose -l cmpd.sdf -f fragment.sdf -o cmpd_annotated.sdf
 ```
 
 Secondly, substructure (fragment) information is gathered by below commands.
