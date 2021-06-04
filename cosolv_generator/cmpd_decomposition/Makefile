@@ -22,11 +22,11 @@ OPENBABELLP = -L$(OBABEL_INSTALL_PATH)/lib
 
 .SUFFIXES: .cc .o
 
-_EXPRORER_DECOMPOSE_OBJS = exprorer_decompose_main.o UnionFindTree.o utils.o OBMolReader.o Converter.o MoleculeToFragments.o AtomType.o Atom.o Molecule.o Vector3d.o Fragment.o infile_reader.o log_writer_stream.o
+_DECOMPOSE_OBJS = decompose_main.o UnionFindTree.o utils.o OBMolReader.o Converter.o MoleculeToFragments.o AtomType.o Atom.o Molecule.o Vector3d.o Fragment.o infile_reader.o log_writer_stream.o
 
-ALL = objs exprorer_decompose
+ALL = objs decompose
 
-EXPRORER_DECOMPOSE_OBJS = $(patsubst %,objs/%,$(_EXPRORER_DECOMPOSE_OBJS))
+DECOMPOSE_OBJS = $(patsubst %,objs/%,$(_DECOMPOSE_OBJS))
 
 .PHONY: clean all
 
@@ -35,7 +35,7 @@ all: $(ALL)
 objs:
 	mkdir -p objs
 
-exprorer_decompose: $(EXPRORER_DECOMPOSE_OBJS)
+decompose: $(DECOMPOSE_OBJS)
 	$(CXX)  $(CXXFLAGS) -o $@ $^ $(OPENBABELLP) $(BOOSTLP) -lboost_regex -lboost_program_options -lopenbabel
 
 
@@ -43,7 +43,7 @@ exprorer_decompose: $(EXPRORER_DECOMPOSE_OBJS)
 objs/UnionFindTree.o: src/UnionFindTree.cc src/UnionFindTree.hpp
 	$(CXX)  $(CXXFLAGS) $(BOOSTIP) -o $@ -c $<
 
-objs/exprorer_decompose_main.o: src/exprorer_decompose_main.cc
+objs/decompose_main.o: src/decompose_main.cc
 	$(CXX)  $(CXXFLAGS) $(BOOSTIP) $(OPENBABELIP) -o $@ -c $< 
 
 objs/paramAD_reader.o: src/paramAD_reader.cc

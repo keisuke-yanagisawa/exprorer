@@ -34,7 +34,9 @@ namespace {
       ("fragment,f", value<std::string>(), "fragment file (.mol2 file)")
       ("ligand,l", value<std::string>(), "ligand file")
       ("output,o", value<std::string>(), "output (annotated) ligand file (.sdf file)")
-      ("log", value<std::string>(), "log file");
+      ("log", value<std::string>(), "log file")
+      ("capping_atomic_num", value<int>()->default_value(6), "The atomic number of capping atoms")
+      ("enable_carbon_capping", bool_switch()->default_value(false), "Enabling capping even for Carbon atoms");
     options_description desc;
     desc.add(options).add(hidden);
     variables_map vmap;
@@ -42,22 +44,19 @@ namespace {
 	  options(desc).positional(pos_desc).run(), vmap);
     notify(vmap);
 
-    // showing help dialogue.
-    if (vmap.count("help")){
-      std::cout << "Usage: espresso_decompose [options]\n"
+
+    // showing help dialog
+    bool insufficient_input = (!vmap.count("conf-file")) &&
+      (!vmap.count("fragment") || !vmap.count("ligand") || !vmap.count("output"));
+    bool help_mode = vmap.count("help");
+    if (insufficient_input || help_mode){
+      if (!help_mode){
+	std::cout << "too few arguments" << std::endl;
+      }
+      
+      std::cout << "Usage: " << argv[0] << "[options]" << std::endl
 		<< options << std::endl;
       std::exit(0);
-    }
-
-    // there are insufficient inputs
-    if (!vmap.count("conf-file")){
-      if (!vmap.count("fragment") || !vmap.count("ligand") || !vmap.count("output")){
-	std::cout << "too few arguments" << std::endl;
-	std::cout << "Usage: espresso_decompose [options]\n"
-		  << options << std::endl;
-	std::exit(1);
-
-      }
     }
     
     // parse input options and configuration file
@@ -67,6 +66,8 @@ namespace {
     if (vmap.count("fragment"))   conf.fragment_file   = vmap["fragment"].as<std::string>();
     if (vmap.count("output"))     conf.output_file     = vmap["output"].as<std::string>();
     if (vmap.count("log"))        conf.log_file        = vmap["log"].as<std::string>();
+    conf.capping_atomic_num = vmap["capping_atomic_num"].as<int>();
+    conf.do_carbon_capping  = vmap["enable_carbon_capping"].as<bool>();
 
     return conf;
   }
@@ -94,7 +95,9 @@ namespace {
   int decomposite(const std::vector<OpenBabel::OBMol>&  molecules,
 		        std::vector<std::string>&       frag_smi_list,
 		        std::vector<OpenBabel::OBMol>&  annotated_mols,
-		        std::vector<OpenBabel::OBMol>&  fragments){
+		        std::vector<OpenBabel::OBMol>&  fragments,
+		        int                             capping_atomic_num = 6,
+		        bool                            capping_for_carbon = false){
 
     format::Converter conv;
 
@@ -105,7 +108,7 @@ namespace {
       std::vector<fragdock::Fragment> frags = fragdock::getFragments(mol);
       
       for(std::vector<fragdock::Fragment>::iterator fit=frags.begin(); fit!=frags.end(); ++fit){
-	OpenBabel::OBMol obmol = conv.toOBMol(*fit, molecules[i], true);
+	OpenBabel::OBMol obmol = conv.toOBMol(*fit, molecules[i], capping_atomic_num, capping_for_carbon);
 	correctvalence(&obmol);
 	std::string smiles = obmol2Smiles(obmol);
 	frag_smiles.push_back(smiles);
@@ -185,7 +188,7 @@ int main(int argc, char** argv){
   logs::lout << logs::info << "parse ligand file: " << config.ligand_file;
   std::vector<OpenBabel::OBMol> molecules = format::ParseFile(config.ligand_file);
   logs::lout << logs::info << "decomposite ligands into fragments";
-  decomposite(molecules, frag_smi_list, annotated_mols, fragments);
+  decomposite(molecules, frag_smi_list, annotated_mols, fragments, config.capping_atomic_num, config.do_carbon_capping);
 
   logs::lout << logs::info << "output ligands added fragment information at " << config.output_file;
   outputmolecules(annotated_mols, config.output_file);
