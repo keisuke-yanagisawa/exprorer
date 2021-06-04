@@ -12,8 +12,9 @@ namespace format {
     Converter() {}
     fragdock::Molecule    toFragmentMol(const OpenBabel::OBMol& mol);
     OpenBabel::OBMol      toOBMol(const fragdock::Molecule &mol, 
-				  const OpenBabel::OBMol& original_obmol, 
-				  bool put_methyl_group);
+				  const OpenBabel::OBMol& original_obmol,
+				  int capping_atomic_num,
+				  bool capping_for_carbon);
   };
 } // namespace format
 #endif

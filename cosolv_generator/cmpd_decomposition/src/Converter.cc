@@ -64,7 +64,8 @@ namespace format {
     return mol;
   }
 
-  OpenBabel::OBMol Converter::toOBMol(const fragdock::Molecule &mol, const OpenBabel::OBMol& original_obmol, bool put_methyl_group) {
+  OpenBabel::OBMol Converter::toOBMol(const fragdock::Molecule &mol, const OpenBabel::OBMol& original_obmol,
+				      int capping_atomic_num = 6, bool capping_for_carbon = false) {
     using namespace fragdock;
     using namespace std;
 
@@ -88,7 +89,7 @@ namespace format {
       */
     }
 
-    if(put_methyl_group){
+    if(capping_atomic_num >= 0){ // DO capping if non-negative value
       std::vector<int> include_list;
       for(int i=0; i<original_obmol.NumBonds(); i++){
 	const OpenBabel::OBBond *bond = original_obmol.GetBond(i);
@@ -110,14 +111,16 @@ namespace format {
 	
 	if(id1_not_in_fragment == id2_not_in_fragment) continue;
 	else if(id1_not_in_fragment){
-	  if(bond->GetEndAtom()->GetAtomicNum() == 6) continue;
+	  if(!capping_for_carbon &&
+	     bond->GetEndAtom()->GetAtomicNum() == 6) continue;
 	  modification_id = atom_id1;
 	}else{
-	  if(bond->GetBeginAtom()->GetAtomicNum() == 6) continue;
+	  if(!capping_for_carbon &&
+	     bond->GetBeginAtom()->GetAtomicNum() == 6) continue;
 	  modification_id = atom_id2;
 	}
 	include_list.push_back(modification_id);
-	obmol.GetAtomById(modification_id)->SetAtomicNum(6); //carbon
+	obmol.GetAtomById(modification_id)->SetAtomicNum(capping_atomic_num);
 	obmol.GetAtomById(modification_id)->SetFormalCharge(0); // neutral
       }
       for(int i=0; i<include_list.size(); i++){
