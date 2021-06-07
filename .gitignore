@@ -1,3 +1,5 @@
+### c++ gitignore ###
+
 # Prerequisites
 *.d
 
@@ -31,5 +33,17 @@
 *.out
 *.app
 
+### python / jupyter gitignore ###
+
+# Auto generated files
 **.pyc
+**.ipynb_checkpoints
+
+### git ignore for other files ###
+
+# emacs files
 **~
+**\#
+
+# Miscellaneous files
+**log
