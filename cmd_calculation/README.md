@@ -36,6 +36,13 @@ bash msmd_job.sh example/msmd_config.sh
 ```
 The commands will execute 20 runs of CMD with Gromacs, each of which includes 40 ns of production run as a default.
 
+### construct spatial probability map (PMAP)
+```
+python script/combine_pmaps.py -i [dx files of all runs] -o pmap.dx \
+       --mode probability -m [reference protein structure].pdb
+```
+The command will construct PMAP in accordance with input map files.
+
 ## How to modify config files
 
 ### To change the number of runs / the length of each production run
