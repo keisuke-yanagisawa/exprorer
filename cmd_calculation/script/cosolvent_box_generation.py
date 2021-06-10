@@ -61,7 +61,14 @@ def calculate_boxsize(pdbfile, tmp_prefix=".tmp"):
     center_str = gop(f"cat {tmp_prefix}.in.result | grep The\ center | cut -d: -f2 | sed s/,//g")
     center = [float(s) for s in center_str.split()]
     box_size_str = gop(f"tail -n 1 {tmp_prefix}.rst7 | cut -c -36")
-    box_size = [float(s) for s in box_size_str.split()]
+    try:
+        box_size = [float(s) for s in box_size_str.split()]
+    except ValueError as e:
+        print(e)
+        print("cat leap.log")
+        print(gop("cat leap.log"))
+        exit(1)
+        
     box_size = max(box_size)
 
     return box_size

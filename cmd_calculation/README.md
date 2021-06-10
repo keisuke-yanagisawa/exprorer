@@ -31,8 +31,9 @@ Please modify `setting/initialize.sh` to correctly use all executables and GPUs.
 ### Test execution
 If all settings goes well, below commands run MD calculations.
 ```
-cd /PATH/TO/exprorer/cmd_calculation    # MUST RUN THEM AT THIS DIRECTORY
-bash msmd_job.sh example/msmd_config.sh
+cd /PATH/TO/exprorer/cmd_calculation              # MUST RUN THEM AT THIS DIRECTORY
+bash msmd_preparation.sh example/msmd_config.sh   # system prepration
+bash msmd_mdrun.sh example/msmd_config.sh         # MD execution
 ```
 The commands will execute 20 runs of CMD with Gromacs, each of which includes 40 ns of production run as a default.
 
