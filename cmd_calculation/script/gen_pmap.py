@@ -9,6 +9,11 @@ def gen_parm7(in_top, in_gro, out_parm7):
     gromacs = pmd.load_file(in_top, xyz=in_gro)
     gromacs.save(out_parm7, overwrite=True)
 
+def gen_pdb(in_gro, out_pdb, gmx):
+    ret = gop(f"""{gmx} trjconv -s {in_gro} -f {in_gro} -o {out_pdb} << EOF
+0
+EOF""")
+    print(ret)
 
 def do_cpptraj(top, resi_st, resi_ed, traj, ref, ref_resi_st, ref_resi_ed, cid, prefix,
                n=100, d=1, traj_start=1, traj_stop="last", traj_offset=1, cpptraj_exe="cpptraj"):
@@ -55,6 +60,7 @@ if __name__ == "__main__":
     parser.add_argument("--stop", dest="stop", default="last")
     parser.add_argument("--offset", dest="offset", default=1)
     parser.add_argument("--cpptraj", default="cpptraj", help="path to cpptraj executable")
+    parser.add_argument("--gmx", default="gmx_mpi", help="path to gromacs executable")
     parser.add_argument("prot_param")
     parser.add_argument("cosolv_param")
 
@@ -66,12 +72,16 @@ if __name__ == "__main__":
         print("INFO: [ReferenceStructure] is not set in any config file. [Protein] will be used alternatively.")
         params["ReferenceStructure"] = params["Protein"]
 
-    temp_parm7 = ".temp.parm7"
-    gen_parm7(args.topology,
-              args.reference,
-              temp_parm7)
+    #temp_parm7 = ".temp.parm7"
+    #gen_parm7(args.topology,
+    #          args.reference,
+    #          temp_parm7)
+    tmp_pdb = ".tmp.pdb"
+    gen_pdb(args.reference,
+            tmp_pdb,
+            args.gmx)
 
-    do_cpptraj(temp_parm7,
+    do_cpptraj(tmp_pdb, #temp_parm7,
                params["Protein"]["resi_st"],
                params["Protein"]["resi_ed"],
                args.trajin,
