@@ -41,6 +41,7 @@ grid map_{prefix}_nV.dx  {n} {d} {n} {d} {n} {d} :{cid}&(!@VIS)
 grid map_{prefix}_nVH.dx {n} {d} {n} {d} {n} {d} :{cid}&(!@VIS)&(!@H*)
 grid map_{prefix}_V.dx   {n} {d} {n} {d} {n} {d} :{cid}@VIS
 grid map_{prefix}_O.dx   {n} {d} {n} {d} {n} {d} :{cid}@O*
+grid map_{prefix}_nVXH.dx {n} {d} {n} {d} {n} {d} :{cid}&(!@VIS)&(!@H*)&(!@XX)
 
 trajout {prefix}_position_check.pdb start 1 stop 1 offset 1
 trajout {prefix}_position_check2.pdb offset 100
