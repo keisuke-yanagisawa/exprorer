@@ -172,18 +172,22 @@ if __name__ == "__main__":
     packmol_input = f"{tmpdir}/.temp_packmol.input"
     packmol_box_pdb = f"{tmpdir}/.temp_box.pdb"
     cfrcmods = [f"{tmpdir}/.temp_cosolvent_{cid}.frcmod" for cid in cids]
+    if "frcmod" in params["Cosolvent"] and params["Cosolvent"]["frcmod"] != "":
+        cfrcmods = params["Cosolvent"]["frcmod"].split()
     gen_packmol_input(params["Protein"]["pdb"], cpdbs,
                       packmol_box_pdb,
                       packmol_input,
                       boxsize,
-                      float(params["Cosolvent"]["molar"]))
+                      float(params["Cosolvent"]["molar"]),
+                      args.seed)
     while True:
         run_packmol(args.packmol, packmol_input)  # -> output: packmol_box_pdb
         temp_box = f"{tmpdir}/.temp_packmol_box_2.pdb"
         gop("grep -v OXT {} > {}".format(packmol_box_pdb, temp_box))
 
-        for mol2, frcmod in zip(cmols, cfrcmods):
-            run_parmchk(mol2, frcmod, params["Cosolvent"]["atomtype"])
+        if "frcmod" not in params["Cosolvent"] or params["Cosolvent"]["frcmod"] == "":
+            for mol2, frcmod in zip(cmols, cfrcmods):
+                run_parmchk(mol2, frcmod, params["Cosolvent"]["atomtype"])
 
 
         # 2. amber tleap
