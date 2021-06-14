@@ -37,6 +37,7 @@ preparation(){
 	-oprefix $OUTPUTDIR/prep$i/$TARGET_NAME \
         --packmol $PACKMOL \
 	--tleap   $TLEAP \
+	-seed $i \
 	-no-rm-temp
 
     $PYTHON $WORKDIR/script/convert_amber_to_gromacs.py \

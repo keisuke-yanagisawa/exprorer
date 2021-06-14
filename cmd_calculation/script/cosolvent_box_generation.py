@@ -32,7 +32,7 @@ quit
 """
 
 TEMPLATE_PACKMOL_HEADER = """
-seed -1
+seed {seed}
 tolerance 2.0
 output {output}
 add_amber_ter
@@ -79,7 +79,7 @@ def run_parmchk(mol2, frcmod, at):
     print(gop(f"parmchk2 -i {mol2} -f mol2 -o {frcmod} -s {at_id}"))
 
 
-def gen_packmol_input(protein_pdb, cosolv_pdbs, box_pdb, inp, box_size, molar):
+def gen_packmol_input(protein_pdb, cosolv_pdbs, box_pdb, inp, box_size, molar, seed=-1):
     # shorten path length to pdb file
     # too long path cannot be treated by packmol
     temp_protein_pdb = f"{tmpdir}/.temp_protein.pdb"
@@ -90,7 +90,7 @@ def gen_packmol_input(protein_pdb, cosolv_pdbs, box_pdb, inp, box_size, molar):
 
     num = int(constants.N_A * molar * (box_size**3) * (10**-27))
     with open(inp, "w") as fout:
-        fout.write(TEMPLATE_PACKMOL_HEADER.format(output=box_pdb, prot=temp_protein_pdb))
+        fout.write(TEMPLATE_PACKMOL_HEADER.format(output=box_pdb, prot=temp_protein_pdb, seed=seed))
         fout.write("\n")
         for pdb in temp_pdbs:
             fout.write(TEMPLATE_PACKMOL_STRUCT.format(cosolv=pdb, num=num, size=box_size/2))
@@ -144,6 +144,7 @@ if __name__ == "__main__":
                         help="comma-separated water and ion list to be put on last in pdb entry")
     parser.add_argument("-no-rm-temp", action="store_true", dest="no_rm_temp_flag",
                         help="the flag not to remove all temporal files")
+    parser.add_argument("-seed", default=-1, type=int)
     parser.add_argument("--version", action="version", version=VERSION)
     args = parser.parse_args()
 
