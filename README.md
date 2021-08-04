@@ -74,6 +74,7 @@ conda install rdkit=2020.03.1
 ```
 
 ## Reference
-[Beasley1990] Beasley JE. "A Lagrangian Heuristic for Set-Covering Problems", Nav Res Logist 37: 151-164, 1990.  
-[Yanagisawa2021] Yanagisawa K, Moriwaki Y, Terada T, Shimizu K, "EXPRORER: Rational Cosolvent Set Construction Method for Cosolvent Molecular Dynamics Using Large-Scale Computation", J Chem Inf Model, 2021. (Epub ahead of print)
-- doi: [10.1021/acs.jcim.1c00134](https://doi.org/10.1021/acs.jcim.1c00134)
+[Beasley1990] Beasley JE. "A Lagrangian Heuristic for Set-Covering Problems", *Nav Res Logist* **37**: 151-164, 1990.
+
+[Yanagisawa2021] Yanagisawa K, Moriwaki Y, Terada T, Shimizu K, "EXPRORER: Rational Cosolvent Set Construction Method for Cosolvent Molecular Dynamics Using Large-Scale Computation", *J Chem Inf Model* **61**: 2744-2753, 2021.
+- doi: [10.1021/acs.jcim.1c00134](https://doi.org/10.1021/acs.jcim.1c00134) - open access
