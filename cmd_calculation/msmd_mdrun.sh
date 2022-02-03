@@ -26,7 +26,6 @@ preparation(){
     fi
 
     $GMX make_ndx -f $OUTPUTDIR/prep$i/$TARGET_NAME.gro << EOF
-! "Water_and_ions"
 q
 EOF
 

@@ -63,7 +63,7 @@ dispcorr     = enerpres
 optimize_fft = yes
 ;
 tcoupl       = v-rescale
-tc_grps      = Protein Non-Protein
+tc_grps      = Non-Water Water
 tau_t        = 0.1 0.1
 ref_t        = 300.0 300.0
 ;
@@ -121,7 +121,7 @@ coulombtype     = PME    ; Particle Mesh Ewald for long-range electrostatics
 
 ; Temperature coupling is on
 tcoupl    = V-rescale   ; modified Berendsen thermostat
-tc-grps   = !Water_and_ions Water_and_ions   ; two coupling groups - more accurate
+tc-grps   = Non-Water Water   ; two coupling groups - more accurate
 tau_t     = 0.1  0.1               ; time constant, in ps
 ref_t     = 300  300      ; reference temperature, one for each group, in K
 

@@ -25,8 +25,8 @@ preparation(){
     logging_debug "protein_param_file $protein_param_file"
     logging_debug "probe_param_file $probe_param_file"
 
-    cp $INPUTDIR/$protein_param_file $OUTPUTDIR/prep$i/input/protein.conf
-    cp $INPUTDIR/$probe_param_file   $OUTPUTDIR/prep$i/input/probe.conf
+    cp $protein_param_file $OUTPUTDIR/prep$i/input/protein.conf
+    cp $probe_param_file   $OUTPUTDIR/prep$i/input/probe.conf
     cd $OUTPUTDIR/prep$i
 
     cosolvent_ID=`get_ini_variable $OUTPUTDIR/prep$i/input/probe.conf Cosolvent cid`
@@ -58,7 +58,7 @@ preparation(){
 
     # gen position restraint files
     $PYTHON $WORKDIR/script/add_posredefine2top.py \
-	-v -res WAT Na+ Cl- CA MG ZN ${cosolvent_ID} \
+	-v -res WAT Na+ Cl- CA MG ZN CU ${cosolvent_ID} \
 	-target protein \
 	-gro $OUTPUTDIR/prep$i/$TARGET_NAME.gro \
 	-i $OUTPUTDIR/prep$i/${TARGET_NAME}_tmp.top \
