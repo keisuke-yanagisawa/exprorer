@@ -38,6 +38,7 @@ cd boost_1_69_0
 ./b2 install --prefix=PATH/TO/BOOST/1_69_0 --without-python
 
 echo "export BOOST_INSTALL_PATH=/PATH/TO/BOOST/1_69_0" >> ~/.bashrc
+source ~/.bashrc
 echo "export LD_LIBRARY_PATH=$BOOST_INSTALL_PATH/lib:$LD_LIBRARY_PATH" >> ~/.bashrc
 source ~/.bashrc
 ```
@@ -57,7 +58,8 @@ make test
 make install
 
 echo "export OBABEL_INSTALL_PATH=/PATH/TO/openbabel/2_4_1" >> ~/.bashrc
-echo "export LD_LIBRARY_PATH=$OBABEL_INSTALL_PATH:lib:$LD_LIBRARY_PATH" >> ~/.bashrc
+source ~/.bashrc
+echo "export LD_LIBRARY_PATH=$OBABEL_INSTALL_PATH/lib:$LD_LIBRARY_PATH" >> ~/.bashrc
 source ~/.bashrc
 ```
 
